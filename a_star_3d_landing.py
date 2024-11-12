@@ -14,14 +14,15 @@ import time
 class Weighted_A_star(object):
     def __init__(self, resolution=0.5):
         self.Alldirec = {(1, 0, 0): 1, (0, 1, 0): 1, (0, 0, 1): 1, \
-                        (-1, 0, 0): 1, (0, -1, 0): 1, (0, 0, -1): 1, \
-                        (1, 1, 0): np.sqrt(2), (1, 0, 1): np.sqrt(2), (0, 1, 1): np.sqrt(2), \
-                        (-1, -1, 0): np.sqrt(2), (-1, 0, -1): np.sqrt(2), (0, -1, -1): np.sqrt(2), \
-                        (1, -1, 0): np.sqrt(2), (-1, 1, 0): np.sqrt(2), (1, 0, -1): np.sqrt(2), \
-                        (-1, 0, 1): np.sqrt(2), (0, 1, -1): np.sqrt(2), (0, -1, 1): np.sqrt(2), \
-                        (1, 1, 1): np.sqrt(3), (-1, -1, -1) : np.sqrt(3), \
-                        (1, -1, -1): np.sqrt(3), (-1, 1, -1): np.sqrt(3), (-1, -1, 1): np.sqrt(3), \
-                        (1, 1, -1): np.sqrt(3), (1, -1, 1): np.sqrt(3), (-1, 1, 1): np.sqrt(3)}
+                        (-1, 0, 0): 1, (0, -1, 0): 1, (0, 0, -1): 1 #, \
+                        # (1, 1, 0): np.sqrt(2), (1, 0, 1): np.sqrt(2), (0, 1, 1): np.sqrt(2), \
+                        # (-1, -1, 0): np.sqrt(2), (-1, 0, -1): np.sqrt(2), (0, -1, -1): np.sqrt(2), \
+                        # (1, -1, 0): np.sqrt(2), (-1, 1, 0): np.sqrt(2), (1, 0, -1): np.sqrt(2), \
+                        # (-1, 0, 1): np.sqrt(2), (0, 1, -1): np.sqrt(2), (0, -1, 1): np.sqrt(2), \
+                        # (1, 1, 1): np.sqrt(3), (-1, -1, -1) : np.sqrt(3), \
+                        # (1, -1, -1): np.sqrt(3), (-1, 1, -1): np.sqrt(3), (-1, -1, 1): np.sqrt(3), \
+                        # (1, 1, -1): np.sqrt(3), (1, -1, 1): np.sqrt(3), (-1, 1, 1): np.sqrt(3)
+                        }
         self.settings = 'NonCollisionChecking' # 'NonCollisionChecking' or 'CollisionChecking'                
         self.env = env(resolution=resolution)
         self.start, self.goal = tuple(self.env.start), tuple(self.env.goal)
@@ -59,7 +60,7 @@ class Weighted_A_star(object):
                     self.g[xj] = a
                     self.Parent[xj] = xi
                     # assign or update the priority in the open
-                    self.OPEN.put(xj, a + 1 * heuristic_fun(self, xj))
+                    self.OPEN.put(xj, a + 1000 * heuristic_fun(self, xj))
             # For specified expanded nodes, used primarily in LRTA*
             if N:
                 if len(self.CLOSED) % N == 0:

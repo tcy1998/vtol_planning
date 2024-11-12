@@ -37,7 +37,9 @@ def Heuristic(Space, t):
 def heuristic_fun(initparams, k, t=None):
     if t is None:
         t = initparams.goal
-    return max([abs(t[0] - k[0]), abs(t[1] - k[1]), abs(t[2] - k[2])])
+    return np.linalg.norm(np.array(k) - np.array(t))
+    # return np.euclidean(k, t)
+    # return max([abs(t[0] - k[0]), abs(t[1] - k[1]), abs(t[2] - k[2])])
 
 def isinbound(i, x, mode = False, factor = 0, isarray = False):
     if mode == 'obb':
